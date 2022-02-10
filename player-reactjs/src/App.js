@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 import {qPlayer} from 'qplayer-npm';
 
 function App() {
+
+  const [playerInstanceId, setPlayerInstanceId] = useState(undefined); 
 
   useEffect(() => {
 
@@ -15,14 +17,30 @@ function App() {
     // initiate player after component was mounted
     qPlayer("player", params, function(){
       console.log("Player initiated")
+
+      let playerId = this._instanceId;
+      setPlayerInstanceId(playerId)
     });
 
-  });
+  },[]);
+
+  const deletePlayer = () => {
+    if(window.qencodePlayers[playerInstanceId]){
+      window.qencodePlayers[playerInstanceId].dispose();
+      delete window.qencodePlayers[playerInstanceId];   
+      setPlayerInstanceId(undefined)
+    }
+  }
 
   return (
     <div className="App">
       <h1>Qencode Player test</h1>
       <div id="player"></div>
+
+      {
+        playerInstanceId && <button onClick={() => deletePlayer()}>Delete Player</button>
+      }
+      
     </div>
   );
 }
