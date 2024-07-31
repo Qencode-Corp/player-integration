@@ -10,8 +10,9 @@ function App() {
   useEffect(() => {
 
     let params = {
-      licenseKey: '7f7c5654-7cab-b35b-e6a1-765a330dcff9',
-      videoSources: { src: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" }
+      //please replace with your Qencode player instance license key
+      licenseKey: '12345654-7cab-b35b-e6a1-765a330dcff9',
+      videoSources: { src: "https://player-samples.media-storage.us-west.qencode.com/sintel-optimized-hls/playlist.m3u8" }
     }    
 
     // initiate player after component was mounted
